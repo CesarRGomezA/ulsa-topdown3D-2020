@@ -10,11 +10,15 @@ public class Enemy : MonoBehaviour
     float moveSpeed;
     [SerializeField, Range(0.1f, 10f)]
     float minDistance;
-
+    
     NavMeshAgent navMeshAgent;
+
+    [SerializeField]
+    Animator anim;
 
     void Awake() 
     {
+        anim = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -27,11 +31,25 @@ public class Enemy : MonoBehaviour
             navMeshAgent.destination = Gamemanager.instance.Player.transform.position;
             transform.LookAt(Gamemanager.instance.Player.transform);
         }
+        else
+        {
+            navMeshAgent.destination = transform.position;
+        }
+    }
+
+    void LateUpdate() 
+    {
+         anim.SetBool("run", Attack);    
     }
 
     bool Attack
     {
-        get => Vector3.Distance(this.transform.position, Gamemanager.instance.Player.transform.position) <= minDistance;
+        get => distanceBtwPlayer <= minDistance && distanceBtwPlayer > navMeshAgent.stoppingDistance;
+    }
+
+    float distanceBtwPlayer
+    {
+        get => Vector3.Distance(this.transform.position, Gamemanager.instance.Player.transform.position);
     }
 
 }
