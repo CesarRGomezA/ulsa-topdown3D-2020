@@ -9,7 +9,10 @@ public class Gamemanager : MonoBehaviour
      [SerializeField]
      Player player;
 
+     bool isInCombat;
+
     public Player Player { get => player; }
+    public bool IsInCombat { get => isInCombat; set => isInCombat = value; }
 
     void Awake() 
     {
@@ -22,5 +25,10 @@ public class Gamemanager : MonoBehaviour
             Destroy(gameObject);
         }    
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void StartCombat()
+    {
+        player.Anim.SetLayerWeight(1, 1);
     }
 }

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();   
     }
 
+
     void Update()
     {
         transform.Translate(Axis.normalized.magnitude * Vector3.forward * moveSpeed * Time.deltaTime);
@@ -28,4 +29,5 @@ public class Player : MonoBehaviour
     {
         get => new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
     }
+    public Animator Anim { get => anim; }
 }
