@@ -30,5 +30,13 @@ public class Gamemanager : MonoBehaviour
     public void StartCombat()
     {
         player.Anim.SetLayerWeight(1, 1);
+        player.WeaponVisible(true);
+    }
+
+     public void StopCombat()
+    {
+        player.Anim.SetLayerWeight(0, 1);
+        player.Anim.SetLayerWeight(1, 0);
+        player.WeaponVisible(false);
     }
 }
